@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Premium Sneakers - Order</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, "Noto Sans Bengali", sans-serif;
+      background: #f3f4f6;
+      color: #222;
+    }
+
+    .container {
+      max-width: 520px;
+      margin: auto;
+      min-height: 100vh;
+      background: #fff;
+    }
+
+    .header {
+      background: #111;
+      color: #fff;
+      text-align: center;
+      padding: 22px 15px;
+    }
+
+    .header h1 {
+      font-size: 24px;
+      margin-bottom: 6px;
+    }
+
+    .header p {
+      font-size: 14px;
+      opacity: .8;
+    }
+
+    .content {
+      padding: 20px;
+    }
+
+    /* Main Product Image */
+    .main-image {
+      width: 100%;
+      height: 330px;
+      object-fit: contain;
+      display: block;
+      background: #f7f7f7;
+      border-radius: 15px;
+      margin-bottom: 15px;
+    }
+
+    /* Color */
+    .section-title {
+      font-size: 16px;
+      font-weight: bold;
+      margin: 18px 0 10px;
+    }
+
+    .color-options {
+      display: flex;
+      gap: 12px;
+    }
+
+    .color-card {
+      flex: 1;
+      border: 2px solid #ddd;
+      border-radius: 11px;
+      padding: 5px;
+      cursor: pointer;
+      background: #fff;
+      transition: .2s;
+    }
+
+    .color-card.active {
+      border-color: #111;
+    }
+
+    .color-card img {
+      width: 100%;
+      height: 90px;
+      object-fit: contain;
+      display: block;
+      background: #f7f7f7;
+      border-radius: 7px;
+    }
+
+    .color-name {
+      text-align: center;
+      font-size: 14px;
+      padding: 7px 0 5px;
+    }
+
+    /* Product */
+    .product-name {
+      font-size: 21px;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .price {
+      font-size: 27px;
+      font-weight: bold;
+      margin-top: 6px;
+    }
+
+    /* Size */
+    .size-options {
+      display: flex;
+      gap: 8px;
+    }
+
+    .size-btn {
+      flex: 1;
+      padding: 12px 5px;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    .size-btn.active {
+      background: #111;
+      color: #fff;
+      border-color: #111;
+    }
+
+    /* Form */
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 7px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      outline: none;
+      font-size: 15px;
+      font-family: inherit;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: #111;
+    }
+
+    textarea {
+      height: 95px;
+      resize: vertical;
+    }
+
+    /* Summary */
+    .summary {
+      background: #f6f6f6;
+      padding: 17px;
+      border-radius: 12px;
+      margin: 20px 0;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 7px 0;
+      font-size: 15px;
+    }
+
+    .summary-total {
+      border-top: 1px solid #ddd;
+      margin-top: 8px;
+      padding-top: 13px;
+      font-size: 19px;
+      font-weight: bold;
+    }
+
+    /* Order Button */
+    .order-btn {
+      width: 100%;
+      padding: 16px;
+      border: none;
+      border-radius: 9px;
+      background: #111;
+      color: #fff;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .order-btn:disabled {
+      opacity: .6;
+      cursor: not-allowed;
+    }
+
+    /* Success */
+    .success {
+      display: none;
+      text-align: center;
+      padding: 45px 20px;
+    }
+
+    .success-icon {
+      width: 70px;
+      height: 70px;
+      margin: auto;
+      border-radius: 50%;
+      background: #111;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 35px;
+    }
+
+    .success h2 {
+      margin-top: 20px;
+      font-size: 24px;
+    }
+
+    .success p {
+      color: #666;
+      margin-top: 10px;
+      line-height: 1.6;
+    }
+
+    .order-number {
+      background: #f5f5f5;
+      padding: 15px;
+      border-radius: 9px;
+      margin-top: 20px;
+      font-size: 14px;
+      word-break: break-all;
+    }
+
+    .footer {
+      text-align: center;
+      color: #888;
+      font-size: 12px;
+      padding: 20px;
+    }
+
+    /* Loading */
+    .loading {
+      display: none;
+      text-align: center;
+      margin-top: 10px;
+      color: #666;
+      font-size: 13px;
+    }
+  </style>
+</head>
+
+
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <h1>Premium Sneakers</h1>
+    <p>অর্ডার করতে নিচের তথ্যগুলো পূরণ করুন</p>
+  </div>
+
+
+  <!-- =========================
+       ORDER PAGE
+  ========================== -->
+
+  <div id="orderPage">
+
+    <div class="content">
+
+      <!-- MAIN IMAGE -->
+      <img
+        id="mainImage"
+        class="main-image"
+        src="https://placehold.co/600x500?text=Black+Sneakers"
+        alt="Sneakers"
+      >
+
+
+      <!-- COLOR -->
+      <div class="section-title">
+        কালার সিলেক্ট করুন
+      </div>
+
+      <div class="color-options">
+
+        <!-- BLACK -->
+        <div
+          class="color-card active"
+          onclick="selectColor('Black', this)"
+        >
+          <img
+            id="blackColorImage"
+            src="https://placehold.co/300x250?text=Black"
+            alt="Black Sneakers"
+          >
+
+          <div class="color-name">
+            Black
+          </div>
+        </div>
+
+
+        <!-- WHITE -->
+        <div
+          class="color-card"
+          onclick="selectColor('White', this)"
+        >
+          <img
+            id="whiteColorImage"
+            src="https://placehold.co/300x250?text=White"
+            alt="White Sneakers"
+          >
+
+          <div class="color-name">
+            White
+          </div>
+        </div>
+
+      </div>
+
+
+      <!-- PRODUCT NAME -->
+      <div class="product-name">
+        Premium Casual Sneakers
+      </div>
+
+
+      <!-- PRICE -->
+      <div class="price">
+        ৳ <span id="productPrice">1490</span>
+      </div>
+
+
+      <!-- SIZE -->
+      <div class="section-title">
+        সাইজ সিলেক্ট করুন
+      </div>
+
+      <div class="size-options">
+
+        <button
+          class="size-btn"
+          onclick="selectSize('40', this)"
+        >
+          40
+        </button>
+
+        <button
+          class="size-btn"
+          onclick="selectSize('41', this)"
+        >
+          41
+        </button>
+
+        <button
+          class="size-btn active"
+          onclick="selectSize('42', this)"
+        >
+          42
+        </button>
+
+        <button
+          class="size-btn"
+          onclick="selectSize('43', this)"
+        >
+          43
+        </button>
+
+        <button
+          class="size-btn"
+          onclick="selectSize('44', this)"
+        >
+          44
+        </button>
+
+      </div>
+
+
+      <!-- CUSTOMER INFORMATION -->
+      <div class="section-title">
+        আপনার তথ্য
+      </div>
+
+
+      <!-- NAME -->
+      <div class="form-group">
+
+        <label>
+          আপনার নাম *
+        </label>
+
+        <input
+          type="text"
+          id="name"
+          placeholder="আপনার সম্পূর্ণ নাম"
+        >
+
+      </div>
+
+
+      <!-- PHONE -->
+      <div class="form-group">
+
+        <label>
+          মোবাইল নাম্বার *
+        </label>
+
+        <input
+          type="tel"
+          id="phone"
+          placeholder="01XXXXXXXXX"
+          maxlength="11"
+        >
+
+      </div>
+
+
+      <!-- ADDRESS -->
+      <div class="form-group">
+
+        <label>
+          সম্পূর্ণ ঠিকানা *
+        </label>
+
+        <textarea
+          id="address"
+          placeholder="বাড়ি/রোড, এলাকা, থানা, জেলা লিখুন"
+        ></textarea>
+
+      </div>
+
+
+      <!-- SUMMARY -->
+      <div class="summary">
+
+        <div class="summary-row">
+
+          <span>
+            প্রোডাক্ট প্রাইস
+          </span>
+
+          <span>
+            ৳ <span id="summaryProduct">1490</span>
+          </span>
+
+        </div>
+
+
+        <div class="summary-row">
+
+          <span>
+            ডেলিভারি ফি
+          </span>
+
+          <span>
+            ৳ 100
+          </span>
+
+        </div>
+
+
+        <div class="summary-row summary-total">
+
+          <span>
+            সর্বমোট
+          </span>
+
+          <span>
+            ৳ <span id="totalPrice">1590</span>
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <!-- ORDER BUTTON -->
+      <button
+        id="orderButton"
+        class="order-btn"
+        onclick="confirmOrder()"
+      >
+        অর্ডার কনফার্ম করুন
+      </button>
+
+
+      <div
+        id="loadingText"
+        class="loading"
+      >
+        অর্ডার সংরক্ষণ হচ্ছে...
+      </div>
+
+    </div>
+
+
+    <div class="footer">
+      © 2026 Premium Sneakers
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       SUCCESS PAGE
+  ========================== -->
+
+  <div
+    id="successPage"
+    class="success"
+  >
+
+    <div class="success-icon">
+      ✓
+    </div>
+
+    <h2>
+      অর্ডার সফল হয়েছে!
+    </h2>
+
+    <p>
+      আপনার অর্ডারটি সফলভাবে গ্রহণ করা হয়েছে।
+      <br>
+      খুব শীঘ্রই আমাদের প্রতিনিধি আপনার সাথে যোগাযোগ করবে।
+    </p>
+
+
+    <div class="order-number">
+
+      <strong>
+        আপনার Order ID
+      </strong>
+
+      <br><br>
+
+      <span id="successOrderId"></span>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =================================================
+     FIREBASE + JAVASCRIPT
+================================================= -->
+
+<script type="module">
+
+  /* ==========================================
+     FIREBASE IMPORT
+  ========================================== */
+
+  import {
+    initializeApp
+  } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+  import {
+    getDatabase,
+    ref,
+    push,
+    set,
+    serverTimestamp
+  } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
+
+
+  /* ==========================================
+     🔥 YOUR FIREBASE CONFIG
+     
+     এখানে আপনার Firebase Config বসাবেন
+  ========================================== */
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCylaiKXjXOS9Cfk9O1fcpDGogdY7_gEcA",
+  authDomain: "solo-37a1b.firebaseapp.com",
+  databaseURL: "https://orderpage.firebaseio.com",
+  projectId: "solo-37a1b",
+  storageBucket: "solo-37a1b.firebasestorage.app",
+  messagingSenderId: "460941218315",
+  appId: "1:460941218315:web:c9dde6fe291dbdcd06ad0e",
+  measurementId: "G-N6705R9EMZ"
+};
+
+
+  /* ==========================================
+     INITIALIZE FIREBASE
+  ========================================== */
+
+  const app =
+    initializeApp(firebaseConfig);
+
+  const database =
+    getDatabase(app);
+
+
+  /* ==========================================
+     PRODUCT SETTINGS
+  ========================================== */
+
+  const PRODUCT_NAME =
+    "Premium Casual Sneakers";
+
+  const PRODUCT_PRICE =
+    1690;
+
+  const DELIVERY_FEE =
+    100;
+
+
+  /* ==========================================
+     👟 PRODUCT IMAGES
+     
+     এখানে আপনার আসল ছবির URL বসাবেন
+  ========================================== */
+
+  const productImages = {
+
+    black:
+      "https://res.cloudinary.com/ehr3ciyw/image/upload/f_auto,q_auto/ChatGPT_Image_Sep_2_2026_12_29_43_AM",
+
+    white:
+      "https://res.cloudinary.com/ehr3ciyw/image/upload/f_auto,q_auto/ChatGPT_Image_Sep_2_2026_12_29_34_AM"
+
+  };
+
+
+  /* ==========================================
+     SELECTED COLOR / SIZE
+  ========================================== */
+
+  let selectedColor =
+    "Black";
+
+  let selectedSize =
+    "42";
+
+
+  /* ==========================================
+     SET COLOR IMAGES
+  ========================================== */
+
+  document.getElementById(
+    "blackColorImage"
+  ).src =
+    productImages.black;
+
+
+  document.getElementById(
+    "whiteColorImage"
+  ).src =
+    productImages.white;
+
+
+  document.getElementById(
+    "mainImage"
+  ).src =
+    productImages.black;
+
+
+  /* ==========================================
+     COLOR SELECT
+  ========================================== */
+
+  window.selectColor =
+    function(color, element) {
+
+      selectedColor =
+        color;
+
+
+      /*
+        Black অথবা White অনুযায়ী
+        main image পরিবর্তন
+      */
+
+      if (color === "Black") {
+
+        document.getElementById(
+          "mainImage"
+        ).src =
+          productImages.black;
+
+      }
+
+
+      if (color === "White") {
+
+        document.getElementById(
+          "mainImage"
+        ).src =
+          productImages.white;
+
+      }
+
+
+      /*
+        Active border পরিবর্তন
+      */
+
+      document
+        .querySelectorAll(".color-card")
+        .forEach(card => {
+
+          card.classList.remove(
+            "active"
+          );
+
+        });
+
+
+      element.classList.add(
+        "active"
+      );
+
+    };
+
+
+  /* ==========================================
+     SIZE SELECT
+  ========================================== */
+
+  window.selectSize =
+    function(size, element) {
+
+      selectedSize =
+        size;
+
+
+      document
+        .querySelectorAll(".size-btn")
+        .forEach(button => {
+
+          button.classList.remove(
+            "active"
+          );
+
+        });
+
+
+      element.classList.add(
+        "active"
+      );
+
+    };
+
+
+  /* ==========================================
+     CONFIRM ORDER
+  ========================================== */
+
+  window.confirmOrder =
+    async function() {
+
+
+      /* CUSTOMER DATA */
+
+      const name =
+        document
+          .getElementById("name")
+          .value
+          .trim();
+
+
+      const phone =
+        document
+          .getElementById("phone")
+          .value
+          .trim();
+
+
+      const address =
+        document
+          .getElementById("address")
+          .value
+          .trim();
+
+
+      /* ======================================
+         VALIDATION
+      ====================================== */
+
+      if (!name) {
+
+        alert(
+          "দয়া করে আপনার নাম লিখুন।"
+        );
+
+        document
+          .getElementById("name")
+          .focus();
+
+        return;
+      }
+
+
+      if (!phone) {
+
+        alert(
+          "দয়া করে আপনার মোবাইল নাম্বার লিখুন।"
+        );
+
+        document
+          .getElementById("phone")
+          .focus();
+
+        return;
+      }
+
+
+      /*
+        Bangladesh phone validation
+      */
+
+      const phonePattern =
+        /^01[3-9]\d{8}$/;
+
+
+      if (!phonePattern.test(phone)) {
+
+        alert(
+          "দয়া করে সঠিক ১১ সংখ্যার মোবাইল নাম্বার দিন।"
+        );
+
+        document
+          .getElementById("phone")
+          .focus();
+
+        return;
+      }
+
+
+      if (!address) {
+
+        alert(
+          "দয়া করে আপনার সম্পূর্ণ ঠিকানা লিখুন।"
+        );
+
+        document
+          .getElementById("address")
+          .focus();
+
+        return;
+      }
+
+
+      /* ======================================
+         TOTAL
+      ====================================== */
+
+      const total =
+        PRODUCT_PRICE +
+        DELIVERY_FEE;
+
+
+      /* ======================================
+         BUTTON LOADING
+      ====================================== */
+
+      const button =
+        document.getElementById(
+          "orderButton"
+        );
+
+
+      const loading =
+        document.getElementById(
+          "loadingText"
+        );
+
+
+      button.disabled =
+        true;
+
+      button.textContent =
+        "অর্ডার সংরক্ষণ হচ্ছে...";
+
+      loading.style.display =
+        "block";
+
+
+      try {
+
+
+        /* ====================================
+           CREATE NEW FIREBASE ORDER
+        ==================================== */
+
+        const ordersRef =
+          ref(
+            database,
+            "orders"
+          );
+
+
+        const newOrderRef =
+          push(ordersRef);
+
+
+        const orderId =
+          newOrderRef.key;
+
+
+        /* ====================================
+           ORDER DATA
+        ==================================== */
+
+        const orderData = {
+
+          orderId:
+
+            orderId,
+
+
+          customer: {
+
+            name:
+              name,
+
+            phone:
+              phone,
+
+            address:
+              address
+
+          },
+
+
+          product: {
+
+            name:
+              PRODUCT_NAME,
+
+            color:
+              selectedColor,
+
+            size:
+              selectedSize,
+
+            price:
+              PRODUCT_PRICE
+
+          },
+
+
+          deliveryFee:
+
+            DELIVERY_FEE,
+
+
+          total:
+
+            total,
+
+
+          status:
+
+            "pending",
+
+
+          createdAt:
+
+            serverTimestamp()
+
+        };
+
+
+        /* ====================================
+           SAVE ORDER
+        ==================================== */
+
+        await set(
+          newOrderRef,
+          orderData
+        );
+
+
+        /* ====================================
+           SHOW SUCCESS PAGE
+        ==================================== */
+
+        document.getElementById(
+          "successOrderId"
+        ).textContent =
+          orderId;
+
+
+        document.getElementById(
+          "orderPage"
+        ).style.display =
+          "none";
+
+
+        document.getElementById(
+          "successPage"
+        ).style.display =
+          "block";
+
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+
+
+      }
+
+
+      catch(error) {
+
+
+        console.error(
+          "Firebase Error:",
+          error
+        );
+
+
+        alert(
+          "অর্ডার সংরক্ষণ করা যায়নি।\n\n" +
+          "Firebase Database Rules এবং Config চেক করুন।"
+        );
+
+
+        button.disabled =
+          false;
+
+
+        button.textContent =
+          "অর্ডার কনফার্ম করুন";
+
+
+        loading.style.display =
+          "none";
+
+      }
+
+    };
+
+
+  /* ==========================================
+     INITIAL PRICE
+  ========================================== */
+
+  document.getElementById(
+    "productPrice"
+  ).textContent =
+    PRODUCT_PRICE;
+
+
+  document.getElementById(
+    "summaryProduct"
+  ).textContent =
+    PRODUCT_PRICE;
+
+
+  document.getElementById(
+    "totalPrice"
+  ).textContent =
+    PRODUCT_PRICE +
+    DELIVERY_FEE;
+
+</script>
+
+</body>
+</html>
