@@ -262,6 +262,31 @@
       color: #666;
       font-size: 13px;
     }
+
+
+    /* Floating WhatsApp Button */
+    .whatsapp-float {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: #25D366;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(0,0,0,.25);
+      z-index: 9999;
+    }
+
+    .whatsapp-float:hover {
+      transform: scale(1.08);
+    }
+
   </style>
 </head>
 
@@ -355,6 +380,13 @@
       </div>
 
       <div class="size-options">
+
+        <button
+          class="size-btn"
+          onclick="selectSize('39', this)"
+        >
+          39
+        </button>
 
         <button
           class="size-btn"
@@ -1078,6 +1110,18 @@ const firebaseConfig = {
     DELIVERY_FEE;
 
 </script>
+
+
+
+<!-- FLOATING WHATSAPP BUTTON -->
+<a
+  class="whatsapp-float"
+  href="https://wa.me/8801624339750"
+  target="_blank"
+  aria-label="WhatsApp এ যোগাযোগ করুন"
+>
+  &#128172;
+</a>
 
 </body>
 </html>
